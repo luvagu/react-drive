@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react'
-import { useAuth } from '../contexts/AuthContext'
+import { useAuth } from '../../contexts/AuthContext'
 import { Link } from 'react-router-dom'
 
+import CenteredContainer from './CenteredContainer'
 import { Alert, Button, Card, Form } from 'react-bootstrap'
 
 const UpdateProfile = () => {
@@ -40,7 +41,7 @@ const UpdateProfile = () => {
     }
  
     return (
-        <>
+        <CenteredContainer>
             <Card>
                 <Card.Body>
                     <h2 className="text-center mb-4">Update Profile</h2>
@@ -64,9 +65,9 @@ const UpdateProfile = () => {
                 </Card.Body>
             </Card>
             <div className="w-100 text-center mt-2">
-                <Link to='/'>Return to Dashboard</Link>
+                <Link to='/profile'>Return to Profile</Link>
             </div>
-        </>
+        </CenteredContainer>
     )
 }
 export default UpdateProfile

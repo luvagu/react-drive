@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { useAuth } from '../contexts/AuthContext'
+import { useAuth } from '../../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 
+import CenteredContainer from './CenteredContainer'
 import { Alert, Button, Card } from 'react-bootstrap'
 
-const Dashboard = () => {
+const Profile = () => {
     const [error, setError] = useState('')
     const { currentUser, logout } = useAuth()
     const history = useHistory()
@@ -21,10 +22,10 @@ const Dashboard = () => {
     }
 
     return (
-        <>
+        <CenteredContainer>
             <Card>
                 <Card.Body>
-                    <h2 className="text-center mb-4">Dashboard</h2>
+                    <h2 className="text-center mb-4">Profile</h2>
                     {error && (<Alert variant="danger">{error}</Alert>)}
                     <strong>Email:</strong> {currentUser.email}
                     <Link to='/update-profile' className="w-100 btn btn-primary mt-3">Update Profile</Link>
@@ -33,8 +34,8 @@ const Dashboard = () => {
             <div className="w-100 text-center mt-2">
                 <Button variant="link" onClick={handleLogout}>Log Out</Button>
             </div>
-        </>
+        </CenteredContainer>
     )
 }
 
-export default Dashboard
+export default Profile
