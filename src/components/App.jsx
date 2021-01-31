@@ -19,6 +19,7 @@ const App = () => {
           <Switch>
             {/* Drive */}
             <PrivateRoute exact path='/' component={Dashboard} />
+            <PrivateRoute exact path='/folder/:folderId' component={Dashboard} />
 
             {/* Profile */}
             <PrivateRoute path='/profile' component={Profile} />
