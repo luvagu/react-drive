@@ -5,7 +5,8 @@ import { useAuth } from '../contexts/AuthContext'
 const ACTIONS = {
     SELECT_FOLDER: 'SELECT_FOLDER',
     UPDATE_FOLDER: 'UPDATE_FOLDER',
-    SET_CHILD_FOLDERS: 'SET_CHILD_FOLDERS'
+    SET_CHILD_FOLDERS: 'SET_CHILD_FOLDERS',
+    SET_CHILD_FILES: 'SET_CHILD_FILES'
 }
 
 export const ROOT_FOLDER = {
@@ -32,6 +33,11 @@ const reducer = (state, { type, payload }) => {
             return {
                 ...state,
                 childFolders: payload.childFolders
+            }
+        case ACTIONS.SET_CHILD_FILES:
+            return {
+                ...state,
+                childFiles: payload.childFiles
             }
         default:
             return {...state}
@@ -80,6 +86,19 @@ export const useFolder = (folderId = null, folder = null) => {
                 dispatch({
                     type: ACTIONS.SET_CHILD_FOLDERS,
                     payload: { childFolders: snapshot.docs.map(database.formatDoc) }
+                })
+            })
+    }, [folderId, currentUser])
+
+    useEffect(() => {
+        return database.files
+            .where('folderId', '==', folderId)
+            .where('userId', '==', currentUser.uid)
+            .orderBy('createdAt')
+            .onSnapshot(snapshot => {
+                dispatch({
+                    type: ACTIONS.SET_CHILD_FILES,
+                    payload: { childFiles: snapshot.docs.map(database.formatDoc) }
                 })
             })
     }, [folderId, currentUser])
