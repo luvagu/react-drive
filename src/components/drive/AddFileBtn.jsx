@@ -42,7 +42,6 @@ const AddFileBtn = ({ currentFolder }) => {
                 const progress = snapshot.bytesTransferred / snapshot.totalBytes
                 setUploadingFiles(prevUploadedFiles => {
                     return prevUploadedFiles.map(uploadedFile => {
-                        console.log('id', id)
                         if (uploadedFile.id === id) {
                             return { ...uploadedFile, progress }
                         }
@@ -54,7 +53,6 @@ const AddFileBtn = ({ currentFolder }) => {
             () => {
                 setUploadingFiles(prevUploadedFiles => {
                     return prevUploadedFiles.map(uploadedFile => {
-                        console.log('id', id)
                         if (uploadedFile.id === id) {
                             return { ...uploadedFile, error: true }
                         }
@@ -65,7 +63,6 @@ const AddFileBtn = ({ currentFolder }) => {
             },
             () => {
                 setUploadingFiles(prevUploadedFiles => {
-                    console.log('id', id)
                     return prevUploadedFiles.filter(uploadedFile => uploadedFile.id !== id)
                 })
 
